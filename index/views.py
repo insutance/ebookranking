@@ -11,6 +11,22 @@ def kyobo(request):
     kyobos = Kyobo.objects
     return render(request, 'kyobo.html', {'kyobos':kyobos})
 
+def yes24(request):
+    yes24s = Yes24.objects
+    return render(request, 'yes24.html', {'yes24s':yes24s})
+
+def aladin(request):
+    aladins = Aladin.objects
+    return render(request, 'aladin.html', {'aladins':aladins})
+
+def naver(request):
+    navers = Naver.objects
+    return render(request, 'naver.html', {'navers':navers})
+
+def ridibooks(request):
+    ridibooks = Ridibooks.objects
+    return render(request, 'ridibooks.html', {'ridibooks':ridibooks})
+
 def delete(request):
     Kyobo.objects.all().delete()
     Yes24.objects.all().delete()

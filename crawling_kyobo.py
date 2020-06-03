@@ -19,7 +19,7 @@ def crawling_init():
     # 교보문고 사이트에서 링크따오기
     driver.get('http://digital.kyobobook.co.kr/digital/publicview/publicViewBest.ink?tabType=EBOOK&tabSrnb=12')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
-    button = driver.find_elements_by_xpath('//*[@id="selectDateType"]/option[2]')
+    button = driver.find_elements_by_xpath('//*[@id="selectDateType"]/option[2]')   #주간 클릭
     button[0].click()  # 버튼 클릭
 
     webhtml1 = driver.page_source
