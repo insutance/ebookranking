@@ -1,22 +1,63 @@
 {% extends 'base.html' %}
 
 {% block contents %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <br>
-    <h1>종합 베스트셀러</h1>
-    <div class="row row-cols-1 row-cols-md-3">
-        
-        {% for book in totalbooks.all %}
-        <div class="col mb-4">
-          <div class="card h-100">
-            <img src="..."  class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ book.title }}</h5>
-              <p class="card-text">{{book.price}}</p>
+<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <br>
+  <h1>종합 베스트셀러</h1><br>
+  <div class="row">
+    
+    {% for book in totalbooks %}
+    
+    <div class="col-md-2">
+      <div class="card mb-4 shadow-sm">
+        <img src="{{book.image}}" class="bd-placeholder-img card-img-top" width="100%" height="225">
+        <div class="card-body">
+          <p class="card-title">{{book.title}}</p>
+          <p class="card-text">
+            {{book.author}}<br>
+            {% if book.kyoboPrice != 0 %}
+              <a href="{{book.kyoboLink}}">{{book.kyoboPrice}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+
+            {% if book.yes24Price != 0 %}
+              <a href="{{book.yes24Link}}">{{book.yes24Price}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+
+            {% if book.aladinPrice != 0 %}
+              <a href="{{book.aladinLink}}">{{book.aladinPrice}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+            
+            {% if book.naverPrice != 0 %}
+              <a href="{{book.naverLink}}">{{book.naverPrice}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+
+            {% if book.ridibooksPrice != 0 %}
+              <a href="{{book.ridibooksLink}}">{{book.ridibooksPrice}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{book.link}}" target="_blank">구매하기</a></button>
+              
             </div>
+            <small class="text-muted">9 mins</small>
           </div>
         </div>
-        {% endfor %}
+      </div>
     </div>
-</main>
+    {% endfor %}
+
+  </div>
+</div>
 {% endblock %}

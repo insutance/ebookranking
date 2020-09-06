@@ -1,11 +1,18 @@
+from selenium import webdriver
 import crawling_kyobo, crawling_yes24, crawling_aladin, crawling_naver, crawling_ridibooks
+import webdriver
 
 def total_books():
-    kyobo_dic = crawling_kyobo.kyobo()
-    yes24_dic = crawling_yes24.yes24()
-    aladin_dic = crawling_aladin.aladin()
-    naver_dic = crawling_naver.naver()
-    ridibooks_dic = crawling_ridibooks.ridibooks()
+    print("totalbooks 시작")
+    driver = webdriver.driver_on()
+
+    kyobo_dic = crawling_kyobo.kyobo(driver)
+    yes24_dic = crawling_yes24.yes24(driver)
+    aladin_dic = crawling_aladin.aladin(driver)
+    naver_dic = crawling_naver.naver(driver)
+    ridibooks_dic = crawling_ridibooks.ridibooks(driver)
+
+    driver.quit()
 
     total_titles = list(kyobo_dic.keys()) + list(yes24_dic.keys()) + list(aladin_dic.keys()) + list(naver_dic.keys()) + list(ridibooks_dic.keys())
     total_titles = list(set(total_titles))  # set을 사용하여 중복값 제거
@@ -29,6 +36,7 @@ def total_books():
     
     total_weight = sorted(total_weight.items(), key=lambda item: item[1], reverse=True)
 
+    print("Totalbooks 완료")
     return kyobo_dic, yes24_dic, aladin_dic, naver_dic, ridibooks_dic, total_weight
 '''
 for key, value in total_weight:

@@ -55,6 +55,20 @@ class Ridibooks(models.Model):
 class TotalBooks(models.Model):
     title = models.CharField(max_length = 100)
     weight = models.FloatField()    # 가중치는 실수로 저장
+    author = models.CharField(max_length = 100, default='')
+    image = models.URLField(default='')
+    
+    kyoboPrice = models.IntegerField(default=0)
+    yes24Price = models.IntegerField(default=0)
+    aladinPrice = models.IntegerField(default=0)
+    naverPrice = models.IntegerField(default=0)
+    ridibooksPrice = models.IntegerField(default=0)
+
+    kyoboLink = models.URLField(default='')
+    yes24Link = models.URLField(default='')
+    aladinLink = models.URLField(default='')
+    naverLink = models.URLField(default='')
+    ridibooksLink = models.URLField(default='')
 
     def __str__(self):
         return self.title
