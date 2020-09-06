@@ -4,15 +4,6 @@ import re
 
 def crawling_init(driver):
     print("교보문고 크롤링 시작")
-    '''
-    options = webdriver.ChromeOptions()  # option 생성
-    options.add_argument('headless')  # 창 안띄우게 하는 옵션 추가
-    options.add_argument("--disable-gpu")  # gpu 사용 안 한다는거
-    options.add_argument("lang=ko_KR")  # 한국어로 설정
-    options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")  # UserAgent 탐지를 막기 위해
-
-    driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
-    '''
 
     driver.get('http://m.kyobobook.co.kr/digital/ebook/bestList.ink?cate_code=1&class_code=&barcode=&barcodes=&cate_gubun=&orderClick=&listCateGubun=1&listSortType=1&listSortType2=0&listSortType3=0&listSortType4=0&need_login=N&type=&returnUrl=%2Fdigital%2Febook%2FbestList.ink&reviewLimit=0&refererUrl=&barcodes_temp=&gubun=&ser_product_yn=&groupSort=1&groupSort2=0&groupSort3=0&groupSort4=0')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
@@ -34,8 +25,6 @@ def crawling_init(driver):
     
     webhtml2 = driver.page_source
     soupweb2 = BeautifulSoup(webhtml2, 'html.parser')
-
-    #driver.quit()
 
     return soup, soupweb1, soupweb2
 

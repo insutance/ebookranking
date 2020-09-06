@@ -2,6 +2,67 @@
 
 {% block contents %}
 <div class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="container">
+  <br>
+  <h1>종합 베스트셀러</h1><br>
+
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="text-center">#</th>
+        <th scope="col" class="text-center" style="width: 150px;">First</th>
+        <th scope="col">Last</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for book in totalbooks.all %}
+      <tr>
+        <th scope="row" class="text-center">{{forloop.counter}}</th>
+        <td class="text-center"><img src="{{book.image}}" style="width: 100px;" alt="..."></td>
+        <td>
+          <h5>{{book.title}}</h5><br>
+          {{book.author}}<br>
+          {% if book.kyoboPrice != 0 %}
+              <a href="{{book.kyoboLink}}">{{book.kyoboPrice}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+
+            {% if book.yes24Price != 0 %}
+              <a href="{{book.yes24Link}}">{{book.yes24Price}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+
+            {% if book.aladinPrice != 0 %}
+              <a href="{{book.aladinLink}}">{{book.aladinPrice}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+            
+            {% if book.naverPrice != 0 %}
+              <a href="{{book.naverLink}}">{{book.naverPrice}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+
+            {% if book.ridibooksPrice != 0 %}
+              <a href="{{book.ridibooksLink}}">{{book.ridibooksPrice}}</a><br>
+            {% else %}
+              X <br>
+            {% endif %}
+          <a href="{{book.link}}" target="_blank"><button type="button" class="btn btn-danger btn-sm">구매하기</button></a>
+        </td>
+      </tr>
+  {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+<!--
+<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <br>
   <h1>종합 베스트셀러</h1><br>
   <div class="row">
@@ -60,4 +121,5 @@
 
   </div>
 </div>
+-->
 {% endblock %}

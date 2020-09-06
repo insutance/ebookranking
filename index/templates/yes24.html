@@ -1,6 +1,36 @@
 {% extends 'base.html' %}
 
 {% block contents %}
+<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="container">
+  <br>
+  <h1>Yes24 베스트셀러</h1><br>
+
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="text-center">#</th>
+        <th scope="col" class="text-center" style="width: 150px;">First</th>
+        <th scope="col">Last</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for book in yes24s.all %}
+      <tr>
+        <th scope="row" class="text-center">{{forloop.counter}}</th>
+        <td class="text-center"><img src="{{book.image}}" style="width: 100px;" alt="..."></td>
+        <td>
+          <h5>{{book.title}}</h5><br>
+          {{book.author}}<br>
+          {{book.price}}<br>
+          <a href="{{book.link}}" target="_blank"><button type="button" class="btn btn-danger btn-sm">구매하기</button></a>
+        </td>
+      </tr>
+  {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
 <!--
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
     <br>
@@ -24,7 +54,7 @@
         </div>
 </main>
 -->
-
+<!--
 <div class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <br>
   <h1>yes24 베스트셀러</h1><br>
@@ -55,4 +85,5 @@
 
   </div>
 </div>
+-->
 {% endblock %}

@@ -3,16 +3,6 @@ from selenium import webdriver
 import re
 
 def crawling_init(driver):
-    print("네이버 크롤링 시작")
-    '''
-    options = webdriver.ChromeOptions()  # option 생성
-    options.add_argument('headless')  # 창 안띄우게 하는 옵션 추가
-    options.add_argument("--disable-gpu")  # gpu 사용 안 한다는거
-    options.add_argument("lang=ko_KR")  # 한국어로 설정
-    options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")  # UserAgent 탐지를 막기 위해
-
-    driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
-    '''
     driver.get('https://series.naver.com/ebook/top100List.nhn')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
     html1 = driver.page_source
@@ -24,8 +14,6 @@ def crawling_init(driver):
 
     soup1 = BeautifulSoup(html1, 'html.parser')
     soup2 = BeautifulSoup(html2, 'html.parser')
-
-    #driver.quit()
 
     return soup1, soup2
 
@@ -113,5 +101,4 @@ def naver(driver):
         data[titles[n]] = title_data
         weight -= 1
 
-    print("네이버 크롤링 완료")
     return data

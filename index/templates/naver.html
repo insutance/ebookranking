@@ -1,27 +1,34 @@
 {% extends 'base.html' %}
 
 {% block contents %}
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <br>
-        <h1>네이버 베스트셀러</h1><br>
-        <div class="row row-cols-1 row-cols-md-6">
-        
-            {% for book in navers.all %}
-            <div class="col mb-4">
-                <div class="card h-100">
-                <img src="{{book.image}}" class="card-img-top" style="max-width: 100%;"  height="300" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">{{ book.title }}</h5>
-                  <p class="card-text">저자 : {{book.author}}</p>
-                  <p class="card-text">가격 : {{book.price}}</p>
-                  <p class="card-text"><a href="{{book.link}}" target="_blank">구매하기</a></p>
-                  <p class="card-text"><a href="{{book.image}}" target="_blank">이미지</a></p>
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-        </div>
-    
-    
-</main>
+<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="container">
+  <br>
+  <h1>네이버 베스트셀러</h1><br>
+
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" class="text-center">#</th>
+        <th scope="col" class="text-center" style="width: 150px;">First</th>
+        <th scope="col">Last</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for book in navers.all %}
+      <tr>
+        <th scope="row" class="text-center">{{forloop.counter}}</th>
+        <td class="text-center"><img src="{{book.image}}" style="width: 100px;" alt="..."></td>
+        <td>
+          <h5>{{book.title}}</h5><br>
+          {{book.author}}<br>
+          {{book.price}}<br>
+          <a href="{{book.link}}" target="_blank"><button type="button" class="btn btn-danger btn-sm">구매하기</button></a>
+        </td>
+      </tr>
+  {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
 {% endblock %}
