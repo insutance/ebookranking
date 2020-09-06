@@ -16,6 +16,7 @@
     </thead>
     <tbody>
   {% for book in totalbooks.all %}
+    {% if forloop.counter < 32 %}
       <tr>
         <th scope="row" class="text-center">{{forloop.counter}}</th>
         <td class="text-center"><img src="{{book.image}}" style="width: 100px;" alt="..."></td>
@@ -54,6 +55,7 @@
           <a href="{{book.link}}" target="_blank"><button type="button" class="btn btn-danger btn-sm">구매하기</button></a>
         </td>
       </tr>
+      {% endif %}
   {% endfor %}
     </tbody>
   </table>
