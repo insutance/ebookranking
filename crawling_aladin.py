@@ -52,7 +52,7 @@ def aladin(driver):
     images = []     # 이미지 저장 리스트
 
     n = 3
-    while(len(titles) < 30):
+    while(len(titles) < 31):
         title = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > a > b')  # select_one을 통해 각 제목 얻어와 title에 저장
         price = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > span.ss_p2 > b > span')
         link = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > a.bo3')

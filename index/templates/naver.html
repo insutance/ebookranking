@@ -1,34 +1,112 @@
 {% extends 'base.html' %}
 
 {% block contents %}
-<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
-  <div class="container">
-  <br>
-  <h1>네이버 베스트셀러</h1><br>
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <div class="sidebar-sticky pt-3">
+      <ul class="nav flex-column">
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">
+                  <span data-feather="home"></span>
+                  종합 베스트셀러 <span class="sr-only">(current)</span>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'kyobo' %}">
+                  <span data-feather="file"></span>
+                  교보문고
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'yes24' %}">
+                  <span data-feather="shopping-cart"></span>
+                  예스24
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'aladin' %}">
+                  <span data-feather="users"></span>
+                  알라딘
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" href="{% url 'naver' %}">
+                  <span data-feather="bar-chart-2"></span>
+                  네이버
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'ridibooks' %}">
+                  <span data-feather="layers"></span>
+                  리디북스
+              </a>
+          </li>
+      </ul>
 
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Saved reports</span>
+          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+          <span data-feather="plus-circle"></span>
+          </a>
+      </h6>
+      <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Current month
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Last quarter
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Social engagement
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Year-end sale
+              </a>
+          </li>
+      </ul>
+  </div>
+</nav>
+
+<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <br>
+  <h2>네이버 베스트셀러</h2><br>
+  <div class="table-responsive">
   <table class="table">
     <thead class="thead-light">
       <tr>
-        <th scope="col" class="text-center">#</th>
-        <th scope="col" class="text-center" style="width: 150px;">First</th>
-        <th scope="col">Last</th>
+        <th scope="col" class="text-center" style="width: 10%;">#</th>
+        <th scope="col" class="text-center" style="width: 20%;">First</th>
+        <th scope="col" style="padding-left: 50px; width: 50%;">Last</th>
+        <th scope="col">구매링크</th>
       </tr>
     </thead>
     <tbody>
   {% for book in navers.all %}
       <tr>
-        <th scope="row" class="text-center">{{forloop.counter}}</th>
-        <td class="text-center"><img src="{{book.image}}" style="width: 100px;" alt="..."></td>
-        <td>
-          <h5>{{book.title}}</h5><br>
-          {{book.author}}<br>
-          {{book.price}}<br>
+        <td scope="row" class="text-center align-middle"><h3><u>{{forloop.counter}}</u></h3></td>
+        <td class="text-center align-middle"><img src="{{book.image}}" style="width: 150px;" alt="..."></td>
+        <td class="align-middle" style="padding-left: 50px;">
+          <h4>{{book.title}}</h4><br>
+          저자 | <strong>{{book.author}}</strong><br>
+          가격 | <big><strong style="color:red;">₩{{book.price}}</strong></big>
+        </td>
+        <td class="align-middle">
           <a href="{{book.link}}" target="_blank"><button type="button" class="btn btn-danger btn-sm">구매하기</button></a>
         </td>
       </tr>
   {% endfor %}
     </tbody>
   </table>
-</div>
+  </div>
 </div>
 {% endblock %}

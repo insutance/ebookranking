@@ -13,6 +13,7 @@ def total_books():
     ridibooks_dic = crawling_ridibooks.ridibooks(driver)
 
     driver.quit()
+    print("driver quit")
 
     total_titles = list(kyobo_dic.keys()) + list(yes24_dic.keys()) + list(aladin_dic.keys()) + list(naver_dic.keys()) + list(ridibooks_dic.keys())
     total_titles = list(set(total_titles))  # set을 사용하여 중복값 제거

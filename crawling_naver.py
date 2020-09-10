@@ -3,6 +3,8 @@ from selenium import webdriver
 import re
 
 def crawling_init(driver):
+    print("네이버 크롤링 시작")
+    
     driver.get('https://series.naver.com/ebook/top100List.nhn')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
     html1 = driver.page_source

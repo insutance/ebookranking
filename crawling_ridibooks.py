@@ -3,6 +3,8 @@ from selenium import webdriver
 import re
 
 def crawling_init(driver):
+    print("리디북스 크롤링 시작")
+    
     driver.get('https://ridibooks.com/bestsellers/general')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
 
