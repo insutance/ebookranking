@@ -1,0 +1,1 @@
+web: gunicorn ebookranking.wsgi --log-file -
