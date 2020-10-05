@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import re
+from index.models import Book
+from django.utils import timezone
 
 def crawling_init(driver):
     print("교보문고 크롤링 시작")
@@ -96,15 +98,21 @@ def kyobo(driver):
     data = {}
 
     weight = 30
+    rank = 1
     for n in range(len(titles)):
         title_data = []
         title_data.append(round(weight * 0.25, 2))
-        title_data.append(prices[n])
+        title_data.append(format(prices[n],","))
         title_data.append(links[n])
         title_data.append(authors[n])
         title_data.append(images[n])
+        title_data.append(rank)
         data[titles[n]] = title_data
         weight -= 1
+        rank += 1
+    
+    for title,value in data.items():
+        Book(title=title, bookstore="kyobo", price=value[1], link=value[2], author=value[3], image=value[4], rank=value[5]).save()
 
     print("교보문고 크롤링 완료")
     return data

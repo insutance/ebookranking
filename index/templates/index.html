@@ -79,7 +79,9 @@
 
 <div class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <br>
-  <h2>종합 베스트셀러</h2><br>
+  <h2>종합 베스트셀러</h2>
+  <h5>{{totalbooks.first.date|date:'Y년 m월 d일'}}</h5>
+  <br>
   <div class="table-responsive">
   <table class="table">
     <thead class="thead-light">
@@ -100,7 +102,7 @@
           저자 | <strong>{{book.author}}</strong><br>
         </td>
         <td class="align-middle">
-            {% if book.kyoboPrice != 0 %}
+            {% if book.kyoboPrice != "" %}
             Kyobo &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
             | <a href="{{book.kyoboLink}}" target="_blank" style="color:red;">
               <big><strong>₩{{book.kyoboPrice}}</strong></big></a><br>
@@ -109,7 +111,7 @@
             | - <br>
             {% endif %}
 
-            {% if book.yes24Price != 0 %}
+            {% if book.yes24Price != "" %}
             Yes24 &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
             | <a href="{{book.yes24Link}}" target="_blank" style="color:red;">
               <big><strong>₩{{book.yes24Price}}</strong></big></a><br>
@@ -118,7 +120,7 @@
             | - <br>
             {% endif %}
 
-            {% if book.aladinPrice != 0 %}
+            {% if book.aladinPrice != "" %}
             Aladin &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
             | <a href="{{book.aladinLink}}" target="_blank" style="color:red;">
               <big><strong>₩{{book.aladinPrice}}</strong></big></a><br>
@@ -127,7 +129,7 @@
             |- <br>
             {% endif %}
             
-            {% if book.naverPrice != 0 %}
+            {% if book.naverPrice != "" %}
             Naver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
             | <a href="{{book.naverLink}}" target="_blank" style="color:red;">
               <big><strong>₩{{book.naverPrice}}</strong></big></a><br>
@@ -136,7 +138,7 @@
             | - <br>
             {% endif %}
 
-            {% if book.ridibooksPrice != 0 %}
+            {% if book.ridibooksPrice != "" %}
               Ridibook <span data-feather="shopping-cart"></span> | 
               <a href="{{book.ridibooksLink}}" target="_blank" style="color:red;">
                 <big><strong>₩{{book.ridibooksPrice}}</strong></big></a><br>

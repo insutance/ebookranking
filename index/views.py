@@ -1,52 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Book, TotalBooks
-from db import insert_data
+from .crawling.crawling_totalbooks import total_books
+from django.utils import timezone
 
 # Create your views here.
 def index(request):
     total_books = TotalBooks.objects.all()
-
-    for book in total_books:
-        if Book.objects.filter(bookstore="ridibooks", title=book.title).first() is not None:
-            ridibooks_data = Book.objects.filter(bookstore="ridibooks", title=book.title).first()
-            book.ridibooksPrice = ridibooks_data.price
-            book.author = ridibooks_data.author
-            book.ridibooksLink = ridibooks_data.link
-            book.image = ridibooks_data.image
-            book.save()
-
-        if Book.objects.filter(bookstore="naver", title=book.title).first() is not None:
-            naver_data = Book.objects.filter(bookstore="naver", title=book.title).first()
-            book.naverPrice = naver_data.price
-            book.author = naver_data.author
-            book.naverLink = naver_data.link
-            book.image = naver_data.image
-            book.save()
-
-        if Book.objects.filter(bookstore="aladin", title=book.title).first() is not None:
-            aladin_data = Book.objects.filter(bookstore="aladin", title=book.title).first()
-            book.aladinPrice = aladin_data.price
-            book.author = aladin_data.author
-            book.aladinLink = aladin_data.link
-            book.image = aladin_data.image
-            book.save()
-
-        if Book.objects.filter(bookstore="yes24", title=book.title).first() is not None:
-            yes24_data = Book.objects.filter(bookstore="yes24", title=book.title).first()
-            book.yes24Price = yes24_data.price
-            book.author = yes24_data.author
-            book.yes24Link = yes24_data.link
-            book.image = yes24_data.image
-            book.save()
-
-        if Book.objects.filter(bookstore="kyobo",title=book.title).first() is not None:
-            kyobo_data = Book.objects.filter(bookstore="kyobo", title=book.title).first()
-            book.kyoboPrice = kyobo_data.price
-            book.author = kyobo_data.author
-            book.kyoboLink = kyobo_data.link
-            book.image = kyobo_data.image
-            book.save()
-
     return render(request, 'index.html', {'totalbooks': total_books})
 
 def kyobo(request):
@@ -75,8 +34,14 @@ def delete(request):
     return redirect('index')
 
 def insert(request):
-    insert_data()
+    total_books()
     return redirect('index')
+
+def search(request):
+    if request.method=="POST":
+        keyword = request.POST['keyword']
+        datas = TotalBooks.objects.filter(title__icontains=keyword)
+        return render(request, 'search.html', {"keyword": keyword, "datas": datas})
 
 def test(request):
     return render(request, 'test.html')

@@ -11,5 +11,6 @@ urlpatterns = [
     path('ridibooks', views.ridibooks, name="ridibooks"),
     path('delete', views.delete, name="delete"),
     path('insert', views.insert, name="insert"),
+    path('search', views.search, name="search"),
     path('test', views.test, name="test"),
 ]

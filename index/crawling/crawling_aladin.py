@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import re
+from index.models import Book
 
 def crawling_init(driver):
     print("알라딘 크롤링 시작")
@@ -52,7 +53,7 @@ def aladin(driver):
     images = []     # 이미지 저장 리스트
 
     n = 3
-    while(len(titles) < 31):
+    while(len(titles) < 30):
         title = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > a > b')  # select_one을 통해 각 제목 얻어와 title에 저장
         price = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > span.ss_p2 > b > span')
         link = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > a.bo3')
@@ -86,15 +87,21 @@ def aladin(driver):
     data = {}
 
     weight = 30
+    rank = 1
     for n in range(len(titles)):
         title_data = []
         title_data.append(round(weight * 0.25, 2))
-        title_data.append(prices[n])
+        title_data.append(format(prices[n],","))
         title_data.append(links[n])
         title_data.append(authors[n])
         title_data.append(images[n])
+        title_data.append(rank)
         data[titles[n]] = title_data
         weight -= 1
+        rank += 1
+
+    for title,value in data.items():
+        Book(title=title, bookstore="aladin",price=value[1], link=value[2], author=value[3], image=value[4], rank=value[5]).save()
 
     print("알라딘 크롤링 완료")
     return data

@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <div class="sidebar-sticky pt-3">
+      <ul class="nav flex-column">
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">
+                  <span data-feather="home"></span>
+                  종합 베스트셀러 <span class="sr-only">(current)</span>
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'kyobo' %}">
+                  <span data-feather="file"></span>
+                  교보문고
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'yes24' %}">
+                  <span data-feather="shopping-cart"></span>
+                  예스24
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'aladin' %}">
+                  <span data-feather="users"></span>
+                  알라딘
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'naver' %}">
+                  <span data-feather="bar-chart-2"></span>
+                  네이버
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'ridibooks' %}">
+                  <span data-feather="layers"></span>
+                  리디북스
+              </a>
+          </li>
+      </ul>
+
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Saved reports</span>
+          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+          <span data-feather="plus-circle"></span>
+          </a>
+      </h6>
+      <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Current month
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Last quarter
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Social engagement
+              </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Year-end sale
+              </a>
+          </li>
+      </ul>
+  </div>
+</nav>
+
+<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <br>
+    <h2>"{{keyword}}" 검색 결과입니다.</h2><br>
+    <div class="table-responsive">
+        {% if not datas %}
+        <hr><div>검색 데이터가 없습니다.</div>
+        {% else %}
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="text-center" style="width: 10%;">랭킹</th>
+                    <th scope="col" class="text-center" style="width: 20%;">책 표지</th>
+                    <th scope="col" style="padding-left: 50px; width: 40%;">책 정보</th>
+                    <th scope="col" style="width: 30%;">구매링크</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in datas.all %}
+                <tr>
+                    <td scope="row" class="text-center align-middle"><h3><u>{{book.rank}}</u></h3></td>
+                    <td class="text-center align-middle"><img src="{{book.image}}" style="width: 150px;" alt="..."></td>
+                    <td class="align-middle" style="padding-left: 50px;">
+                    <h4>{{book.title}}</h4><br>
+                    저자 | <strong>{{book.author}}</strong><br>
+                    </td>
+                    <td class="align-middle">
+                        {% if book.kyoboPrice != "" %}
+                        Kyobo &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
+                        | <a href="{{book.kyoboLink}}" target="_blank" style="color:red;">
+                        <big><strong>₩{{book.kyoboPrice}}</strong></big></a><br>
+                        {% else %}
+                        Kyobo &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
+                        | - <br>
+                        {% endif %}
+
+                        {% if book.yes24Price != "" %}
+                        Yes24 &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
+                        | <a href="{{book.yes24Link}}" target="_blank" style="color:red;">
+                        <big><strong>₩{{book.yes24Price}}</strong></big></a><br>
+                        {% else %}
+                        Yes24 &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
+                        | - <br>
+                        {% endif %}
+
+                        {% if book.aladinPrice != "" %}
+                        Aladin &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
+                        | <a href="{{book.aladinLink}}" target="_blank" style="color:red;">
+                        <big><strong>₩{{book.aladinPrice}}</strong></big></a><br>
+                        {% else %}
+                        Aladin &nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
+                        |- <br>
+                        {% endif %}
+                        
+                        {% if book.naverPrice != "" %}
+                        Naver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
+                        | <a href="{{book.naverLink}}" target="_blank" style="color:red;">
+                        <big><strong>₩{{book.naverPrice}}</strong></big></a><br>
+                        {% else %}
+                        Naver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span data-feather="shopping-cart"></span>
+                        | - <br>
+                        {% endif %}
+
+                        {% if book.ridibooksPrice != "" %}
+                        Ridibook <span data-feather="shopping-cart"></span> | 
+                        <a href="{{book.ridibooksLink}}" target="_blank" style="color:red;">
+                            <big><strong>₩{{book.ridibooksPrice}}</strong></big></a><br>
+                        {% else %}
+                        Ridibook <span data-feather="shopping-cart"></span> | - <br>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
