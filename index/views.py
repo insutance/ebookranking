@@ -5,8 +5,8 @@ from django.utils import timezone
 
 # Create your views here.
 def index(request):
-    total_books = TotalBooks.objects.all()
-    return render(request, 'index.html', {'totalbooks': total_books})
+    books = TotalBooks.objects.all()
+    return render(request, 'index.html', {'totalbooks': books})
 
 def kyobo(request):
     kyobos = Book.objects.filter(bookstore="kyobo")
