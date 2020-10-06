@@ -1,6 +1,7 @@
 from selenium import webdriver
 from . import crawling_kyobo, crawling_yes24, crawling_aladin, crawling_naver, crawling_ridibooks
 from index.models import TotalBooks, Book
+import os
 
 def total_books_data_insert():
     total_books = TotalBooks.objects.all()
@@ -52,6 +53,13 @@ main
 """
 def total_books():
     print("totalbooks 시작")
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    """
     options = webdriver.ChromeOptions()  # option 생성
     options.add_argument('headless')  # 창 안띄우게 하는 옵션 추가
     options.add_argument("--disable-gpu")  # gpu 사용 안 한다는거
@@ -59,7 +67,7 @@ def total_books():
     options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")  # UserAgent 탐지를 막기 위해
 
     driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
-
+    """
     kyobo_dic = crawling_kyobo.kyobo(driver)
     yes24_dic = crawling_yes24.yes24(driver)
     aladin_dic = crawling_aladin.aladin(driver)
