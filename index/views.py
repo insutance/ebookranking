@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Book, TotalBooks
 from .crawling.crawling_totalbooks import total_books
 from django.utils import timezone
+from .crawling import crawling_kyobo,crawling_yes24,crawling_aladin,crawling_naver,crawling_ridibooks,crawling_totalbook
 
 # Create your views here.
 def index(request):
@@ -34,7 +35,14 @@ def delete(request):
     return redirect('index')
 
 def insert(request):
-    total_books()
+    #total_books()
+    crawling_ridibooks.ridibooks()
+    crawling_naver.naver()
+    crawling_kyobo.kyobo()
+    crawling_yes24.yes24()
+    crawling_aladin.aladin()
+    crawling_totalbook.total_book()
+
     return redirect('index')
 
 def search(request):

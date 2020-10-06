@@ -53,15 +53,15 @@ main
 """
 def total_books():
     print("totalbooks 시작")
-    
+    """
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("lang=ko_KR")
-    chrome_options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")  # UserAgent 탐지를 막기 위해
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    """
     """
     options = webdriver.ChromeOptions()  # option 생성
     options.add_argument('headless')  # 창 안띄우게 하는 옵션 추가
@@ -71,14 +71,13 @@ def total_books():
 
     driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
     """
-    kyobo_dic = crawling_kyobo.kyobo(driver)
-    yes24_dic = crawling_yes24.yes24(driver)
-    aladin_dic = crawling_aladin.aladin(driver)
-    naver_dic = crawling_naver.naver(driver)
-    ridibooks_dic = crawling_ridibooks.ridibooks(driver)
+    kyobo_dic = crawling_kyobo.kyobo()
+    yes24_dic = crawling_yes24.yes24()
+    aladin_dic = crawling_aladin.aladin()
+    naver_dic = crawling_naver.naver()
+    ridibooks_dic = crawling_ridibooks.ridibooks()
 
-    driver.close()
-    driver.quit()
+    #driver.quit()
     print("driver quit")
 
     total_titles = list(kyobo_dic.keys()) + list(yes24_dic.keys()) + list(aladin_dic.keys()) + list(naver_dic.keys()) + list(ridibooks_dic.keys())
@@ -110,9 +109,4 @@ def total_books():
     total_books_data_insert()
 
     print("Totalbooks 완료")
-'''
-for key, value in total_weight:
-    print(key + ': ' + str(value))
-'''
-
-
+    return True

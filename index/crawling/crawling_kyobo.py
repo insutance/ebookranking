@@ -4,8 +4,17 @@ import re
 from index.models import Book
 from django.utils import timezone
 
-def crawling_init(driver):
+def crawling_init():
     print("교보문고 크롤링 시작")
+    
+    chrome_options = webdriver.ChromeOptions()
+    #chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("lang=ko_KR")
+    #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
 
     driver.get('http://m.kyobobook.co.kr/digital/ebook/bestList.ink?cate_code=1&class_code=&barcode=&barcodes=&cate_gubun=&orderClick=&listCateGubun=1&listSortType=1&listSortType2=0&listSortType3=0&listSortType4=0&need_login=N&type=&returnUrl=%2Fdigital%2Febook%2FbestList.ink&reviewLimit=0&refererUrl=&barcodes_temp=&gubun=&ser_product_yn=&groupSort=1&groupSort2=0&groupSort3=0&groupSort4=0')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
@@ -27,6 +36,8 @@ def crawling_init(driver):
     
     webhtml2 = driver.page_source
     soupweb2 = BeautifulSoup(webhtml2, 'html.parser')
+    
+    driver.quit()
 
     return soup, soupweb1, soupweb2
 
@@ -45,8 +56,8 @@ def clearPrice(list):
 '''
 Main Code
 '''
-def kyobo(driver):
-    soup, soupweb1, soupweb2 = crawling_init(driver)
+def kyobo():
+    soup, soupweb1, soupweb2 = crawling_init()
 
     titles = []     # 제목 저장 리스트
     prices = []     # 가격 저장 리스트
@@ -112,8 +123,9 @@ def kyobo(driver):
         rank += 1
     
     for title,value in data.items():
-        Book(title=title, bookstore="kyobo", price=value[1], link=value[2], author=value[3], image=value[4], rank=value[5]).save()
+        Book(title=title, bookstore="kyobo", weight=value[0], price=value[1], link=value[2], author=value[3], image=value[4], rank=value[5]).save()
 
     print("교보문고 크롤링 완료")
-    return data
+    #return data
+    return True
 

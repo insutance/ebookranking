@@ -5,6 +5,7 @@ from datetime import datetime
 # Create your models here.
 class Book(models.Model):
     bookstore = models.CharField(max_length=20)
+    weight = models.FloatField(default=0)
     rank = models.IntegerField()
     title = models.CharField(max_length = 100)
     price = models.CharField(max_length=20)
