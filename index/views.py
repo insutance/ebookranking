@@ -45,27 +45,27 @@ def insert(request):
 
     return redirect('index')
 
-def crawling_kyobo(request):
+def crawlingKyobo(request):
     crawling_kyobo.kyobo()
     return redirect('index')
 
-def crawling_yes24(request):
+def crawlingYes24(request):
     crawling_yes24.yes24()
     return redirect('index')
 
-def crawling_aladin(request):
+def crawlingAladin(request):
     crawling_aladin.aladin()
     return redirect('index')
 
-def crawling_naver(request):
+def crawlingNaver(request):
     crawling_naver.naver()
     return redirect('index')
 
-def crawling_ridibooks(request):
+def crawlingRidibooks(request):
     crawling_ridibooks.ridibooks()
     return redirect('index')
 
-def crawling_totalbook(request):
+def crawlingTotalbook(request):
     crawling_totalbook.total_book()
     return redirect('index')
 
