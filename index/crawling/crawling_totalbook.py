@@ -1,6 +1,6 @@
+import os
 from selenium import webdriver
 from index.models import TotalBooks, Book
-import os
 
 def total_books_data_insert():
     total_books = TotalBooks.objects.all()

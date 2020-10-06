@@ -1,7 +1,9 @@
+import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import re
 from index.models import Book
+
 
 def crawling_init():
     print("알라딘 크롤링 시작")

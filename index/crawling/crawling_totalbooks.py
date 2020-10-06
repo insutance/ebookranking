@@ -1,7 +1,7 @@
+import os
 from selenium import webdriver
 from . import crawling_kyobo, crawling_yes24, crawling_aladin, crawling_naver, crawling_ridibooks
 from index.models import TotalBooks, Book
-import os
 
 def total_books_data_insert():
     total_books = TotalBooks.objects.all()
