@@ -4,6 +4,10 @@ from selenium import webdriver
 import re
 from index.models import Book
 from django.utils import timezone
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 def crawling_init():
     print("교보문고 크롤링 시작")
@@ -25,13 +29,24 @@ def crawling_init():
 
     # 교보문고 사이트에서 링크따오기
     driver.get('http://digital.kyobobook.co.kr/digital/publicview/publicViewBest.ink?tabType=EBOOK&tabSrnb=12')
-    driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
+    try:
+        element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, '//*[@id="selectDateType"]/option[2]'))
+            )
+    except TimeoutException:
+        return False
     button = driver.find_elements_by_xpath('//*[@id="selectDateType"]/option[2]')   #주간 클릭
     button[0].click()  # 버튼 클릭
 
     webhtml1 = driver.page_source
     soupweb1 = BeautifulSoup(webhtml1, 'html.parser')
 
+    try:
+        element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, '//*[@id="neo_conbody"]/div/div[3]/a[3]'))
+            )
+    except TimeoutException:
+        return False
     button = driver.find_elements_by_xpath('//*[@id="neo_conbody"]/div/div[3]/a[3]') #//*[@id="neo_conbody"]/div[2]/a[3] 에서 변경
     button[0].click()
     

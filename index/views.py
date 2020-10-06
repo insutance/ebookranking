@@ -38,9 +38,9 @@ def insert(request):
     #total_books()
     crawling_ridibooks.ridibooks()
     crawling_naver.naver()
-    crawling_kyobo.kyobo()
-    crawling_yes24.yes24()
     crawling_aladin.aladin()
+    crawling_yes24.yes24()
+    crawling_kyobo.kyobo()
     crawling_totalbook.total_book()
 
     return redirect('index')
