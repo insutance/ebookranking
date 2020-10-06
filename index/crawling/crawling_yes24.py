@@ -8,13 +8,13 @@ def crawling_init():
     print("예스24 크롤링 시작")
 
     chrome_options = webdriver.ChromeOptions()
-    #chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("lang=ko_KR")
-    #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    #driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
 
     driver.get('http://www.yes24.com/24/Category/BestSeller?CategoryNumber=017&sumgb=06&AO=4&FetchSize=50')  # FetchSize 가 한번에 뜨는 책 개수
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
