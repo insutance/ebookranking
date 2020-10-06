@@ -53,11 +53,13 @@ main
 """
 def total_books():
     print("totalbooks 시작")
+    
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("lang=ko_KR")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     """
     options = webdriver.ChromeOptions()  # option 생성
@@ -74,6 +76,7 @@ def total_books():
     naver_dic = crawling_naver.naver(driver)
     ridibooks_dic = crawling_ridibooks.ridibooks(driver)
 
+    driver.close()
     driver.quit()
     print("driver quit")
 
