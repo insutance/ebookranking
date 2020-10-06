@@ -13,4 +13,10 @@ urlpatterns = [
     path('insert', views.insert, name="insert"),
     path('search', views.search, name="search"),
     path('test', views.test, name="test"),
+    path('crawling-kyobo', views.crawling_kyobo, name="crawling-kyobo"),
+    path('crawling-yes24', views.crawling_yes24, name="crawling-yes24"),
+    path('crawling-aladin', views.crawling_aladin, name="crawling-aladin"),
+    path('crawling-naver', views.crawling_naver, name="crawling-naver"),
+    path('crawling-ridibooks', views.crawling_ridibooks, name="crawling-ridibooks"),
+    path('crawling-totalbook', views.crawling_totalbook, name="crawling-totalbook"),
 ]

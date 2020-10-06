@@ -45,6 +45,30 @@ def insert(request):
 
     return redirect('index')
 
+def crawling_kyobo(request):
+    crawling_kyobo.kyobo()
+    return redirect('index')
+
+def crawling_yes24(request):
+    crawling_yes24.yes24()
+    return redirect('index')
+
+def crawling_aladin(request):
+    crawling_aladin.aladin()
+    return redirect('index')
+
+def crawling_naver(request):
+    crawling_naver.naver()
+    return redirect('index')
+
+def crawling_ridibooks(request):
+    crawling_ridibooks.ridibooks()
+    return redirect('index')
+
+def crawling_totalbook(request):
+    crawling_totalbook.total_book()
+    return redirect('index')
+
 def search(request):
     if request.method=="POST":
         keyword = request.POST['keyword']
