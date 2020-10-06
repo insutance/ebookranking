@@ -33,7 +33,7 @@ def delete(request):
     Book.objects.all().delete()
     TotalBooks.objects.all().delete()
     return redirect('index')
-
+"""
 def insert(request):
     #total_books()
     crawling_ridibooks.ridibooks()
@@ -44,7 +44,7 @@ def insert(request):
     crawling_totalbook.total_book()
 
     return redirect('index')
-
+"""
 def crawling_kyobo(request):
     crawling_kyobo.kyobo()
     return redirect('index')
