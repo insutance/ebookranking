@@ -13,18 +13,19 @@ def crawling_init():
     print("교보문고 크롤링 시작")
 
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    #chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    #driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
+    #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
     print("mobile start!!")
     driver.get('http://m.kyobobook.co.kr/digital/ebook/bestList.ink?cate_code=1&class_code=&barcode=&barcodes=&cate_gubun=&orderClick=&listCateGubun=1&listSortType=1&listSortType2=0&listSortType3=0&listSortType4=0&need_login=N&type=&returnUrl=%2Fdigital%2Febook%2FbestList.ink&reviewLimit=0&refererUrl=&barcodes_temp=&gubun=&ser_product_yn=&groupSort=1&groupSort2=0&groupSort3=0&groupSort4=0')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
 
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
+    """
     print("website start")
     # 교보문고 사이트에서 링크따오기
     driver.get('http://digital.kyobobook.co.kr/digital/publicview/publicViewBest.ink?tabType=EBOOK&tabSrnb=12')
@@ -51,10 +52,11 @@ def crawling_init():
     
     webhtml2 = driver.page_source
     soupweb2 = BeautifulSoup(webhtml2, 'html.parser')
-    
+    """
     driver.quit()
     print("driver quit")
-    return soup, soupweb1, soupweb2
+    #return soup, soupweb1, soupweb2
+    return soup
 
 def clearTitle(list):
     for n in range(len(list)):
@@ -68,23 +70,35 @@ def clearPrice(list):
         list[n] = list[n].strip()
         list[n] = int(list[n])
     return list
+
+def clearAuthor(data):
+    data_split = data.split('       \t')
+    result = data_split[0]
+    return result
 '''
 Main Code
 '''
 def kyobo():
-    soup, soupweb1, soupweb2 = crawling_init()
+    #soup, soupweb1, soupweb2 = crawling_init()
+    soup = crawling_init()
     print("init finish")
     titles = []     # 제목 저장 리스트
     prices = []     # 가격 저장 리스트
     links = []      # 링크 저장 리스트
     authors = []    # 저자 저장 리스트
     images = []     # 이미지 저장 리스트
-
+    tests = []
     n = 1
     while(len(titles) < 30):
         title = soup.select_one('#list > li:nth-child(' + str(n) + ') > div.detail > p.pubTitle > a')  # select_one을 통해 각 제목 얻어와 title에 저장
         price = soup.select_one('#list > li:nth-child(' + str(n) + ') > div.detail > p.pubPrice > span > strong')
         image = soup.select_one('#list > li:nth-child(' + str(n) + ') > div.pic_area > a > img')
+        link = soup.select_one('#list > li:nth-child('+ str(n) +') > div.detail > p.pubTitle > a')
+        author = soup.select_one('#list > li:nth-child('+ str(n) +') > div.detail > p.pubGrp')
+        
+        link = link.get('href')
+        link = re.sub("[a-zA-Z()';:]" , '', link)
+        author = clearAuthor(author.text)
         
         if(title is None or price is None):
             continue
@@ -92,12 +106,15 @@ def kyobo():
             titles.append(title.text)
             prices.append(price.text)
             images.append(image.get('src'))
+            authors.append(author)
+            links.append('http://digital.kyobobook.co.kr/digital/ebook/ebookDetail.ink?barcode='+ str(link))
 
         n += 1
 
     titles = clearTitle(titles)
     prices = clearPrice(prices)
-
+    authors = clearTitle(authors)
+    """
     for n in range(1, 6):
         link = soupweb1.select_one('#listContent > div > ul.best5 > li:nth-child(' + str(n) + ') > div.pic_area > a')
         author = soupweb1.select_one('#listContent > div > ul.best5 > li:nth-child(' + str(n) + ') > div.cont_area > div.info1 > span.n1')
@@ -120,7 +137,7 @@ def kyobo():
 
             links.append("http://digital.kyobobook.co.kr" + link.get('href'))
             authors.append(author.text)
-
+    """
     data = {}
 
     weight = 30
