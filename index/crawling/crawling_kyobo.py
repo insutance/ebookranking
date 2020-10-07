@@ -19,7 +19,7 @@ def crawling_init():
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     #driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
-    print("mobile start!")
+    print("mobile start!!")
     driver.get('http://m.kyobobook.co.kr/digital/ebook/bestList.ink?cate_code=1&class_code=&barcode=&barcodes=&cate_gubun=&orderClick=&listCateGubun=1&listSortType=1&listSortType2=0&listSortType3=0&listSortType4=0&need_login=N&type=&returnUrl=%2Fdigital%2Febook%2FbestList.ink&reviewLimit=0&refererUrl=&barcodes_temp=&gubun=&ser_product_yn=&groupSort=1&groupSort2=0&groupSort3=0&groupSort4=0')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
 
