@@ -16,6 +16,7 @@ def crawling_init():
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     #driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
     
+    print('naver website start!!')
     driver.get('https://series.naver.com/ebook/top100List.nhn')
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
     html1 = driver.page_source
@@ -48,7 +49,8 @@ Main Code
 '''
 def naver():
     soup1, soup2 = crawling_init()
-
+    print('init finish!')
+    
     titles = []     # 제목 저장 리스트
     prices = []     # 가격 저장 리스트
     links = []      # 링크 저장 리스트

@@ -3,6 +3,7 @@ from selenium import webdriver
 from index.models import TotalBooks, Book
 
 def total_books_data_insert():
+    print('total_books_data_insert() start!!')
     total_books = TotalBooks.objects.all()
 
     rank = 1
@@ -89,6 +90,7 @@ def total_book():
 
     total_weight = sorted(total_weight.items(), key=lambda item: item[1], reverse=True)
 
+    print('title and weight store start!!')
     for title, weight in total_weight:
         TotalBooks(title=title, weight=weight).save()
     

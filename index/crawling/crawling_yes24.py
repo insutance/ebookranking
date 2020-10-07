@@ -16,6 +16,7 @@ def crawling_init():
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     #driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
 
+    print('yes24 website start!!')
     driver.get('http://www.yes24.com/24/Category/BestSeller?CategoryNumber=017&sumgb=06&AO=4&FetchSize=50')  # FetchSize 가 한번에 뜨는 책 개수
     driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
 
@@ -57,6 +58,7 @@ Main Code
 def yes24():
     soup = crawling_init()
 
+    print('init finish!')
     titles = []     # 제목 저장 리스트
     prices = []     # 가격 저장 리스트
     links = []      # 링크 저장 리스트
