@@ -6,7 +6,7 @@ from .crawling import crawling_kyobo,crawling_yes24,crawling_aladin,crawling_nav
 
 # Create your views here.
 def index(request):
-    books = TotalBooks.objects.all()
+    books = TotalBooks.objects.all().order_by('rank')
     return render(request, 'index.html', {'totalbooks': books})
 
 def kyobo(request):
