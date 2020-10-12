@@ -30,7 +30,7 @@ def crawling_init():
     except TimeoutException:
         return False
 
-    driver.implicitly_wait(3)  # 버퍼때문에 2초간 기다리게 함
+    #driver.implicitly_wait(3)  # 버퍼때문에 2초간 기다리게 함
     print('2')
     html = driver.page_source
     print('3')
