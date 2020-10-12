@@ -19,4 +19,10 @@ urlpatterns = [
     path('crawling/naver', views.crawlingNaver, name="crawling_naver"),
     path('crawling/ridibooks', views.crawlingRidibooks, name="crawling_ridibooks"),
     path('crawling/totalbook', views.crawlingTotalbook, name="crawling_totalbook"),
+    path('delete/kyobo', views.deleteKyobo, name="delete_kyobo"),
+    path('delete/yes24', views.deleteYes24, name="delete_yes24"),
+    path('delete/aladin', views.deleteAladin, name="delete_aladin"),
+    path('delete/naver', views.deleteNaver, name="delete_naver"),
+    path('delete/ridibooks', views.deleteRidibooks, name="delete_ridibooks"),
+    path('delete/totalbook', views.deleteTotalBook, name="delete_totalbook"),
 ]

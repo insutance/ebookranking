@@ -69,6 +69,30 @@ def crawlingTotalbook(request):
     crawling_totalbook.total_book()
     return redirect('index')
 
+def deleteKyobo(request):
+    Book.objects.filter(bookstore="kyobo").all().delete()
+    return redirect('kyobo')
+
+def deleteYes24(request):
+    Book.objects.filter(bookstore="yes24").all().delete()
+    return redirect('yes24')
+
+def deleteAladin(request):
+    Book.objects.filter(bookstore="aladin").all().delete()
+    return redirect('aladin')
+
+def deleteNaver(request):
+    Book.objects.filter(bookstore="naver").all().delete()
+    return redirect('naver')
+
+def deleteRidibooks(request):
+    Book.objects.filter(bookstore="ridibooks").all().delete()
+    return redirect('ridibooks')
+
+def deleteTotalBook(request):
+    TotalBooks.objects.all().delete()
+    return redirect('index')
+
 def search(request):
     if request.method=="POST":
         keyword = request.POST['keyword']
