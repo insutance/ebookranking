@@ -22,7 +22,6 @@ def crawling_init():
 
     print('yes24 website start!!')
     driver.get('https://www.yes24.com/24/Category/BestSeller?CategoryNumber=017&sumgb=06&AO=4&FetchSize=50')  # FetchSize 가 한번에 뜨는 책 개수
-    print('1')
     try:
         element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, '//*[@id="category_layout"]/tbody'))
@@ -31,13 +30,11 @@ def crawling_init():
         return False
 
     #driver.implicitly_wait(3)  # 버퍼때문에 2초간 기다리게 함
-    print('2')
+    
     html = driver.page_source
-    print('3')
     soup = BeautifulSoup(html, 'html.parser')
-    print('4')
+    
     driver.quit()
-    print('5')
     return soup
 
 def clearTitle(list):
