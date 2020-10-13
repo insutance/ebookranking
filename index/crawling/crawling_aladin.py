@@ -23,7 +23,7 @@ def crawling_init():
     print("aladin website start!!")
     driver.get('https://www.aladin.co.kr/shop/common/wbest.aspx?BranchType=9&BestType=EBookBestseller')
     #driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
-     try:
+    try:
         element = WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, '//*[@id="Myform"]/div[2]/table/tbody'))
             )
