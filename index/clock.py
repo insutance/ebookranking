@@ -42,7 +42,7 @@ def crawlied_ridibooks():
 def crawlied_totalbook():
     crawling_totalbook.total_book()
 """
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour='19,20' ,minute='0,5,10,15,20,25,30,35,40,45,50,55')
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='*' ,minute='0,5,10,15,20,25,30,35,40,45,50,55')
 def scheduled_job():
     Book.objects.all().delete()
     TotalBooks.objects.all().delete()
