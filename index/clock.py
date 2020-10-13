@@ -5,11 +5,15 @@ import django
 django.setup()
 
 from apscheduler.schedulers.blocking import BlockingScheduler
+from index.models import TotalBooks, Book
 from index.crawling import crawling_kyobo,crawling_yes24,crawling_aladin,crawling_naver,crawling_ridibooks,crawling_totalbook
 
 sched = BlockingScheduler()
 @sched.scheduled_job('interval', minutes=2)
 def crawlied_kyobo():
+    Book.objects.all().delete()
+    TotalBooks.objects.all().delete()
+    
     crawling_kyobo.kyobo()
     crawling_yes24.yes24()
     crawling_aladin.aladin()
