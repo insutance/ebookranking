@@ -1,5 +1,5 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
-from .crawling import crawling_kyobo
+from index.crawling import crawling_kyobo
 
 sched = BlockingScheduler()
 @sched.scheduled_job('interval', minutes=2)
