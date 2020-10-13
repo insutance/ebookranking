@@ -3,7 +3,10 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import re
 from index.models import Book
-
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 def crawling_init():
     print("알라딘 크롤링 시작")
@@ -19,7 +22,13 @@ def crawling_init():
     
     print("aladin website start!!")
     driver.get('https://www.aladin.co.kr/shop/common/wbest.aspx?BranchType=9&BestType=EBookBestseller')
-    driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
+    #driver.implicitly_wait(2)  # 버퍼때문에 2초간 기다리게 함
+     try:
+        element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, '//*[@id="Myform"]/div[2]/table/tbody'))
+            )
+    except TimeoutException:
+        return False
 
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
@@ -67,7 +76,6 @@ def aladin():
 
     n = 3
     while(len(titles) < 30):
-        print(n)
         title = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > a > b')  # select_one을 통해 각 제목 얻어와 title에 저장
         price = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > span.ss_p2 > b > span')
         link = soup.select_one('#Myform > div:nth-child(' + str(n) + ') > table > tbody > tr > td:nth-child(3) > table > tbody > tr:nth-child(1) > td:nth-child(1) > div:nth-child(1) > ul > li > a.bo3')
