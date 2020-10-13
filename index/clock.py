@@ -1,8 +1,8 @@
-import django
-django.setup()
-
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'ebookranking.settings'
+
+import django
+django.setup()
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from index.crawling import crawling_kyobo
