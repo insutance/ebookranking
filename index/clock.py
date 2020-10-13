@@ -1,5 +1,5 @@
 import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'anonqaproject.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'ebookranking.settings'
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from index.crawling import crawling_kyobo
