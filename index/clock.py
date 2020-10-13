@@ -42,16 +42,24 @@ def crawlied_ridibooks():
 def crawlied_totalbook():
     crawling_totalbook.total_book()
 """
-@sched.scheduled_job('cron', day_of_week='mon-sun', hour='*' ,minute='0,5,10,15,20,25,30,35,40,45,50,55')
+@sched.scheduled_job('cron', day_of_week='mon-sun', hour='*' ,minute='0,5,10,15,20,25,30,32,34,35,40,45,50,55')
 def scheduled_job():
-    Book.objects.all().delete()
-    TotalBooks.objects.all().delete()
-    
-    crawling_kyobo.kyobo()
-    crawling_yes24.yes24()
-    crawling_aladin.aladin()
-    crawling_naver.naver()
-    crawling_ridibooks.ridibooks()
-    crawling_totalbook.total_book()
+    for i in range(10):
+        while True:
+            try:
+                Book.objects.all().delete()
+                TotalBooks.objects.all().delete()
+                
+                crawling_kyobo.kyobo()
+                crawling_yes24.yes24()
+                crawling_aladin.aladin()
+                crawling_naver.naver()
+                crawling_ridibooks.ridibooks()
+                crawling_totalbook.total_book()
+            except Exception as e:
+                print(e)
+                continue
+            break
+        break
 
 sched.start()
