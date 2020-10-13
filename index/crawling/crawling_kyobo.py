@@ -160,5 +160,3 @@ def kyobo():
     print("교보문고 크롤링 완료")
     #return data
     return True
-
-kyobo()
