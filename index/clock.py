@@ -1,3 +1,6 @@
+import django
+django.setup()
+
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'ebookranking.settings'
 
