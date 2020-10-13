@@ -1,6 +1,10 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
+from .crawling import crawling_kyobo
 
 sched = BlockingScheduler()
+@sched.scheduled_job('interval', minutes=2)
+def crawlied_kyobo():
+    crawling_kyobo.kyobo()
 
 @sched.scheduled_job('interval', minutes=3)
 def timed_job():
