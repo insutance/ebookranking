@@ -1,2 +1,2 @@
 web: gunicorn ebookranking.wsgi --log-file -
-clock: python clock.py
+clock: python index/clock.py
