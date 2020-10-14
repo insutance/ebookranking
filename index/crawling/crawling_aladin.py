@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
 def crawling_init():
-    print("알라딘 크롤링 시작")
+    print("**********알라딘 크롤링 시작**********")
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -125,6 +125,6 @@ def aladin():
     for title,value in data.items():
         Book(title=title, bookstore="aladin", weight=value[0],price=value[1], link=value[2], author=value[3], image=value[4], rank=value[5]).save()
 
-    print("알라딘 크롤링 완료")
+    print("**********알라딘 크롤링 완료**********")
     #return data
     return True
