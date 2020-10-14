@@ -55,7 +55,7 @@ def scheduled_job():
                 crawling_ridibooks.ridibooks()
                 crawling_totalbook.total_book()
             except Exception as e:
-                print("Error 발생: " + e)
+                print(e)
                 continue
             break
         break
