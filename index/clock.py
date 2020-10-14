@@ -40,7 +40,7 @@ while True:
 """
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', hour='*', minutes='0,15,30,45')
+@sched.scheduled_job('cron', hour='*', minute='0,15,30,45')
 def scheduled_job():
     for i in range(10):
         while True:
