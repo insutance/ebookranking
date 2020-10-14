@@ -31,7 +31,7 @@ def crawling_job():
 
 #sched = BlockingScheduler()
 scheduler = BackgroundScheduler()
-scheduler.add_job(crawling_job, 'interval', minute=3)
+scheduler.add_job(crawling_job, 'interval', minutes=3)
 scheduler.start()
 
 while True:
