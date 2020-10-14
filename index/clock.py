@@ -10,7 +10,7 @@ from index.crawling import crawling_kyobo,crawling_yes24,crawling_aladin,crawlin
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', hour='7', minute='40')
+@sched.scheduled_job('cron', hour='*')
 def scheduled_job():
     for i in range(10):
         while True:
