@@ -9,7 +9,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from index.models import TotalBooks, Book
 from index.crawling import crawling_kyobo,crawling_yes24,crawling_aladin,crawling_naver,crawling_ridibooks,crawling_totalbook
 import time
-
+"""
 def crawling_job():
     for i in range(10):
         while True:
@@ -29,7 +29,7 @@ def crawling_job():
             break
         break
 
-#sched = BlockingScheduler()
+
 scheduler = BackgroundScheduler()
 scheduler.add_job(crawling_job, 'interval', minutes=3)
 scheduler.start()
@@ -37,9 +37,10 @@ scheduler.start()
 while True:
     print('time sleep')
     time.sleep(10)
-
 """
-@sched.scheduled_job('cron', hour='*')
+sched = BlockingScheduler()
+
+@sched.scheduled_job('cron', hour='*', minutes='0,15,30,45')
 def scheduled_job():
     for i in range(10):
         while True:
@@ -60,4 +61,3 @@ def scheduled_job():
         break
 
 sched.start()
-"""
