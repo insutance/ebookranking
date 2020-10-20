@@ -96,7 +96,7 @@ def deleteTotalBook(request):
 def search(request):
     if request.method=="POST":
         keyword = request.POST['keyword']
-        datas = TotalBooks.objects.filter(title__icontains=keyword)
+        datas = TotalBooks.objects.filter(title__icontains=keyword).order_by('-rank')
         return render(request, 'search.html', {"keyword": keyword, "datas": datas})
 
 def test(request):
