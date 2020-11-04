@@ -14,7 +14,7 @@ def crawling_init():
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("lang=ko_KR")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    #driver = webdriver.Chrome('/Users/insutance/Downloads/chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
+    #driver = webdriver.Chrome('C:\\Users\\insutance\\Downloads\\program_DownloadFile\\chromedriver',options=chrome_options)  # options는 우리가 추가한 옵션 추가해주기 위해 넣음
     
     print('naver website start!!')
     driver.get('https://series.naver.com/ebook/top100List.nhn')
