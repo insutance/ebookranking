@@ -55,7 +55,7 @@ def total_books_data_insert():
 main
 """
 def total_book():
-    print("totalbooks 시작")
+    print("**********totalbooks 시작**********")
     books = Book.objects.all()
     
     titles = []
@@ -96,5 +96,5 @@ def total_book():
     
     total_books_data_insert()
 
-    print("Totalbooks 완료")
+    print("**********Totalbooks 완료**********")
     return True
